@@ -1,7 +1,7 @@
 import uuid
 from sqlalchemy import Column, Integer, String, Date, Boolean, DateTime, Date, Float
 from werkzeug.security import generate_password_hash, check_password_hash
-from navak.extensions import  db
+from navak.extensions import db
 
 class Employee(db.Model):
     """
@@ -14,50 +14,56 @@ class Employee(db.Model):
 
     FirstName = Column(String(64), nullable=False)
     LastName = Column(String(64), nullable=False)
-    father_name = Column(String())
+    FatherName = Column(String(64), nullable=False)
     BirthDay = Column(Date(), nullable=True)
-    MeliCode = Column(String(24), nullable=True)
-    BirthLocation = Column(String(128), nullable=True)
+    MeliCode = Column(String(32), nullable=True)
+    BirthLocation = Column(String(64), nullable=True)
     PhoneNumber = Column(String(11), nullable=True)
     EmergencyPhone = Column(String(11), nullable=True)
     Address = Column(String(256), nullable=True)
 
-    Education = Column(String(128), nullable=True)
+    Education = Column(Integer(), db.ForeignKey() ,nullable=True)
     StaffCode = Column(Integer(), nullable=False)
 
     ContractType = Column(String(64), nullable=True)
     StartContract = Column(Date(), nullable=False)
     EndContract = Column(Date(), nullable=False)
 
-    WorkPosition = Column()
-    VacationHourTotal = Column(Integer(), nullable=False)
-    VacationHourTaken = Column(Integer(), nullable=False)
+    WorkPosition = Column(Integer(), db.ForeignKey(), nullable=False)
+    VacationHourTotal = Column(Float(), nullable=False)
+    VacationHourTaken = Column(Float(), nullable=False)
     PublicKey = Column(String(36), unique=True, nullable=False)
 
-    Married = Column(Boolean())
-    Children = Column(Integer())
-
-    BaseSalary = Column(String(64))
+    Married = Column(Boolean(), nullable=False)
+    Children = Column(Integer(), nullable=False)
+    BaseSalary = Column(Integer(), nullable=False)
 
     def set_public_key(self):
+        """
+            this Method Set Unique PublicKey For each Employee Object
+        """
         while True:
             key = str(uuid.uuid4())
-            key_db = Employee.query.filter(Employee.public_key == key).first()
+            key_db = Employee.query.filter(Employee.PublicKey == key).first()
             if not key_db:
-                self.public_key = key
+                self.PublicKey = key
                 return True
             else:
                 continue
 
-    def set_vacation_counter(self):
+    def __str__(self):
+        return f"{self.id}-{self.FirstName} {self.LastName}"
+
+
+    def CalculateVacationHour(self):
         """
-            this method calculate vacation day for each employee by its contract time
-            each 30 days => 2.5 vacation
+            this Method calculate vacation hour for each employee by its contract time
+            each 30 days => 2.5 Day vacation
         """
         day_delta = (self.end_contract - self.start_contract).days
-        vataction = ((day_delta / 30) * 2.5) * 8
+        vacation = ((day_delta / 30) * 2.5) * 8
 
         # format number to 1 digit after point ==> 2.59898989: 2.6
-        vataction = round(vataction)
-        self.vacation_count_hour = vataction
-        self.vacation_total_hour = vataction
+        vacation = round(vacation)
+        self.vacation_count_hour = vacation
+        self.vacation_total_hour = vacation
