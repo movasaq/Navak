@@ -942,7 +942,7 @@
 				<v:ud v:nameU="Spacer" v:prompt="" v:val="VT0(0):26"/>
 				<v:ud v:nameU="ShowType" v:prompt="" v:val="VT0(0):26"/>
 				<v:ud v:nameU="ListDivLoc" v:prompt="" v:val="VT0(1.40625):0"/>
-				<v:ud v:nameU="AttributeName" v:prompt="" v:val="VT4(Address CHAR(128))"/>
+				<v:ud v:nameU="AttributeName" v:prompt="" v:val="VT4(Address CHAR(256))"/>
 				<v:ud v:nameU="ContainerMargin" v:prompt="" v:val="VT0(0):0"/>
 				<v:ud v:nameU="WidthMin" v:prompt="" v:val="VT0(0):26"/>
 				<v:ud v:nameU="DarkerColor" v:prompt="" v:val="VT5(#1ba1e2)"/>
@@ -954,11 +954,11 @@
 				<v:ud v:nameU="ListDivLoc" v:prompt="" v:val="VT0(1.75):0"/>
 			</v:userDefs>
 			<title>Attribute.89</title>
-			<desc>Address CHAR(128)</desc>
+			<desc>Address CHAR(256)</desc>
 			<g id="shape89-150" v:mID="89" v:groupContext="groupContent">
 				<v:textBlock v:margins="rect(8,8,8,35)"/>
 				<v:textRect cx="90" cy="1174" width="180" height="28.0036"/>
-				<text x="35" y="1177" class="st5" v:langID="1033"><v:paragraph/><v:tabList/>Address <tspan class="st9">CHAR(128)</tspan></text>			</g>
+				<text x="35" y="1177" class="st5" v:langID="1033"><v:paragraph/><v:tabList/>Address <tspan class="st9">CHAR(256)</tspan></text>			</g>
 			<g id="shape90-154" v:mID="90" v:groupContext="shape" transform="translate(126,0)">
 				<title>Sheet.90</title>
 				<desc>int</desc>
