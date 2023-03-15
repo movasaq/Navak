@@ -67,6 +67,8 @@ class Employee(db.Model):
     Created_Time = Column(DateTime(), nullable=False, default=khayyam.JalaliDatetime.now)
 
 
+    EmployeeTrffic = db.relationship("TrafficControl", backref="employee", lazy="True")
+
     def set_public_key(self):
         """
             this Method Set Unique PublicKey For each Employee Object
