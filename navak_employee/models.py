@@ -3,12 +3,36 @@ from sqlalchemy import Column, Integer, String, Date, Boolean, DateTime, Date, F
 from werkzeug.security import generate_password_hash, check_password_hash
 from navak.extensions import db
 
+
+
+
+class Education(db.Model):
+    """
+        base Model For keep all degree of education
+    """
+    __tablename__ = "navak_education_degree"
+    id = Column(Integer(), primary_key=True)
+    Name = Column(String(64), nullable=False)
+    employee = db.relationship("Employee", backref="Education", lazy="True")
+
+
+class WorkPosition(db.Model):
+    """
+        base Model For keep all WorkPositions
+    """
+    __tablename__ = "navak_work_position"
+    id = Column(Integer(), primary_key=True)
+    Name = Column(String(64), nullable=False)
+    employee = db.relationship("Employee", backref="WorkPosition", lazy="True")
+
+
+
+
 class Employee(db.Model):
     """
         Base Model For all Employee's
     """
     __tablename__ = "navak_employee"
-
 
     id = Column(Integer(), primary_key=True)
 
@@ -22,14 +46,14 @@ class Employee(db.Model):
     EmergencyPhone = Column(String(11), nullable=True)
     Address = Column(String(256), nullable=True)
 
-    Education = Column(Integer(), db.ForeignKey() ,nullable=True)
+    Education = Column(Integer(), db.ForeignKey("navak_education_degree.id") ,nullable=True)
     StaffCode = Column(Integer(), nullable=False)
 
     ContractType = Column(String(64), nullable=True)
     StartContract = Column(Date(), nullable=False)
     EndContract = Column(Date(), nullable=False)
 
-    WorkPosition = Column(Integer(), db.ForeignKey(), nullable=False)
+    WorkPosition = Column(Integer(), db.ForeignKey("navak_work_position.id"), nullable=False)
     VacationHourTotal = Column(Float(), nullable=False)
     VacationHourTaken = Column(Float(), nullable=False)
     PublicKey = Column(String(36), unique=True, nullable=False)
@@ -66,3 +90,7 @@ class Employee(db.Model):
         # format number to 1 digit after point ==> 2.59898989: 2.6
         vacation = round(vacation)
         self.VacationHourTotal = vacation
+
+
+
+
