@@ -1,8 +1,8 @@
+import khayyam
 import uuid
-from sqlalchemy import Column, Integer, String, Date, Boolean, DateTime, Date, Float
+from sqlalchemy import Column, Integer, String, Boolean, Date, Float, DateTime
 from werkzeug.security import generate_password_hash, check_password_hash
 from navak.extensions import db
-
 
 
 
@@ -36,6 +36,8 @@ class Employee(db.Model):
 
     id = Column(Integer(), primary_key=True)
 
+    UserName = Column(String(64), nullable=False)
+    password = Column(String(102), nullable=False)
     FirstName = Column(String(64), nullable=False)
     LastName = Column(String(64), nullable=False)
     FatherName = Column(String(64), nullable=False)
@@ -61,6 +63,9 @@ class Employee(db.Model):
     Married = Column(Boolean(), nullable=False)
     Children = Column(Integer(), nullable=False)
     BaseSalary = Column(Integer(), nullable=False)
+
+    Created_Time = Column(DateTime(), nullable=False, default=khayyam.JalaliDatetime.now())
+
 
     def set_public_key(self):
         """
@@ -90,6 +95,22 @@ class Employee(db.Model):
         # format number to 1 digit after point ==> 2.59898989: 2.6
         vacation = round(vacation)
         self.VacationHourTotal = vacation
+
+
+class ModifyLog(db.Model):
+    """
+        this Table Log all Actions on Employee Table
+    """
+    __tablename__ = "navak_emploee_log"
+    id = Column(Integer(), primary_key=True)
+    # reffer to admin panel
+    By = Column(Integer(), )
+    Description = Column(String(512), nullable=False)
+    LogTime = Column(DateTime(), default=khayyam.JalaliDatetime.now())
+
+
+
+
 
 
 
