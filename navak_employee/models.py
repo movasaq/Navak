@@ -64,7 +64,7 @@ class Employee(db.Model):
     Children = Column(Integer(), nullable=False)
     BaseSalary = Column(Integer(), nullable=False)
 
-    Created_Time = Column(DateTime(), nullable=False, default=khayyam.JalaliDatetime.now())
+    Created_Time = Column(DateTime(), nullable=False, default=khayyam.JalaliDatetime.now)
 
 
     def set_public_key(self):
@@ -106,7 +106,7 @@ class ModifyLog(db.Model):
     # reffer to admin panel
     By = Column(Integer(), )
     Description = Column(String(512), nullable=False)
-    LogTime = Column(DateTime(), default=khayyam.JalaliDatetime.now())
+    LogTime = Column(DateTime(), default=khayyam.JalaliDatetime.now)
 
 
 

@@ -1,8 +1,20 @@
 import uuid
-import datetime as dt
+import khayyam
 from navak.extensions import db
 from werkzeug.security import generate_password_hash, check_password_hash
-from sqlalchemy import Column, String, Integer, DateTime, Boolean, JSON
+from sqlalchemy import Column, String, Integer, DateTime, Boolean
+
+
+
+class Role(db.Model):
+    """
+        base Model For Users Role
+    """
+    __tablename__ = "navak_roles"
+    id = Column(Integer(), primary_key=True)
+    RoleName = Column(String(64))
+    RoleDescription = Column(String(256))
+    Users = db.relationship("User", backref="Role", lazy="True")
 
 
 class User(db.Model):
@@ -11,27 +23,18 @@ class User(db.Model):
     username = Column(String(64), nullable=False, unique=True)
     password = Column(String(102), nullable=False)
 
-    public_username = Column(String(256), nullable=True)
-    created_at = Column(DateTime(), default=dt.datetime.now)
-    active = Column(Boolean(), default=False)
-
-    image = Column(String(256), default="default.png", nullable=False)
-    signature = Column(String(256), nullable=True)
+    FullName = Column(String(102), nullable=True)
+    CreatedTime = Column(DateTime(), default=khayyam.JalaliDatetime.now)
+    Active = Column(Boolean(), default=False)
+    ProfileImage = Column(String(256), default="default.png", nullable=False)
+    UserSignature = Column(String(256), nullable=True)
 
     # user id in chat
-    user_tag = Column(String(128), nullable=True, default=None, unique=True)
+    Usertag = Column(String(128), nullable=True, default=None, unique=True)
+    PublicKey = Column(String(36), nullable=False, unique=True)
 
-    # user public chat key
-    public_key = Column(String(36), nullable=False, unique=True)
+    UserRole = Column(Integer(), db.ForeignKey("navak_roles.id"), nullable=False)
 
-    # this relate user to a group
-    # user_group = Column(Integer(), db.ForeignKey("navak_groups.id"), nullable=False)
-
-    # this defind user access users can have multiply roles
-    user_role = Column(JSON())
-
-    # employee_id = db.relationship("Employee", backref="user", lazy=True)
-    # ProjectStatus = db.relationship("ProjectStatus", backref="user", lazy=True)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -41,15 +44,14 @@ class User(db.Model):
 
     def set_public_key(self):
         """
-            generate a public key for user
-            first query to db for checking db for key
+            This Method Set Unique PublicKey For Users Object
         """
         while True:
             key = str(uuid.uuid4())
-            key_db = User.query.filter(User.public_key == key).first()
+            key_db = User.query.filter(User.PublicKey == key).first()
             if key_db:
                 continue
             else:
-                self.public_key = key
+                self.PublicKey = key
                 return None
 
