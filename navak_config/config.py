@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 import datetime
 
@@ -37,7 +36,9 @@ class config:
 
 class Development(config):
     DEBUG = True
+    FLASK_DEBUG = True
 
 
 class Production(config):
     DEBUG = False
+    FLASK_DEBUG = False
