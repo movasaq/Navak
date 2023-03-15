@@ -6,6 +6,9 @@ import datetime
 BASE_DIR = Path(__file__).parent.parent
 
 
+# Path for Private Static files
+
+
 
 # DB INFO
 USERNAME_DB = "navak"
