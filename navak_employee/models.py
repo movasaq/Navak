@@ -65,5 +65,4 @@ class Employee(db.Model):
 
         # format number to 1 digit after point ==> 2.59898989: 2.6
         vacation = round(vacation)
-        self.vacation_count_hour = vacation
-        self.vacation_total_hour = vacation
+        self.VacationHourTotal = vacation
