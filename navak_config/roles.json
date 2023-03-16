@@ -1,0 +1,29 @@
+{
+  "navak_roles": [
+    {
+      "role-en": "admin",
+      "role-fa": "مدیر",
+      "role-id": "1"
+    },
+    {
+      "role-en": "engineer",
+      "role-fa": "مهندس",
+      "role-id": "2"
+    },
+    {
+      "role-en": "employee",
+      "role-fa": "کارمند",
+      "role-id": "3"
+    },
+    {
+      "role-en": "gard",
+      "role-fa": "حراست",
+      "role-id": "4"
+    },
+    {
+      "role-en": "office",
+      "role-fa": "اداری",
+      "role-id": "5"
+    }
+  ]
+}

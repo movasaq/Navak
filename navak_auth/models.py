@@ -1,9 +1,10 @@
 import uuid
-import khayyam
-from navak.extensions import db
-from werkzeug.security import generate_password_hash, check_password_hash
-from sqlalchemy import Column, String, Integer, DateTime, Boolean
 
+import khayyam
+from sqlalchemy import Column, String, Integer, DateTime, Boolean
+from werkzeug.security import generate_password_hash, check_password_hash
+
+from navak.extensions import db
 
 
 class Role(db.Model):
@@ -30,7 +31,7 @@ class User(db.Model):
     UserSignature = Column(String(256), nullable=True)
 
     # user id in chat
-    Usertag = Column(String(128), nullable=True, default=None, unique=True)
+    Usertag = Column(String(128), nullable=True, unique=True)
     PublicKey = Column(String(36), nullable=False, unique=True)
 
     UserRole = Column(Integer(), db.ForeignKey("navak_roles.id"), nullable=False)

@@ -1,9 +1,10 @@
-import khayyam
 import uuid
-from sqlalchemy import Column, Integer, String, Boolean, Date, Float, DateTime
-from werkzeug.security import generate_password_hash, check_password_hash
-from navak.extensions import db
 
+import khayyam
+from sqlalchemy import Column, Integer, String, Boolean, Date, Float, DateTime
+from werkzeug.security import check_password_hash
+
+from navak.extensions import db
 
 
 class Education(db.Model):
@@ -102,19 +103,6 @@ class Employee(db.Model):
         # format number to 1 digit after point ==> 2.59898989: 2.6
         vacation = round(vacation)
         self.VacationHourTotal = vacation
-
-
-class ModifyLog(db.Model):
-    """
-        this Table Log all Actions on Employee Table
-    """
-    __tablename__ = "navak_emploee_log"
-    id = Column(Integer(), primary_key=True)
-    # reffer to admin panel
-    By = Column(Integer(), )
-    Description = Column(String(512), nullable=False)
-    LogTime = Column(DateTime(), default=khayyam.JalaliDatetime.now)
-
 
 
 
