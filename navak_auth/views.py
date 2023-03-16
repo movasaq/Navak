@@ -3,19 +3,10 @@ from flask import (session, render_template, redirect, url_for, flash, request)
 from navak_auth import auth
 from navak_auth.forms import LoginForm
 from navak_employee.models import Employee
+from navak_config.config import LOGIN_PATHS_MATTERIAL
 
-
-@auth.route("/employee/login/")
-def employee_login_view():
-    """
-        This view return login form for employees
-    :return: Html
-    """
-    form = LoginForm()
-    return render_template("auth/EmployeeLogin.html", form=form)
-
-@auth.route("/employee/login/", methods=["POST"])
-def employee_login_post():
+@auth.route("/login/", methods=["POST"])
+def login_post():
     """
         this view take a post request for login Employees to there panel
     :return: Html
@@ -31,6 +22,11 @@ def employee_login_post():
             flash("اعتبار سنجی نادرست است", "danger")
             return redirect(request.referrer)
 
+        if form.usergroup not in LOGIN_PATHS_MATTERIAL[0]:
+            flash("گروه انتخاب کاربر نادرست است", "danger")
+            return redirect(request.referrer)
+
+        # get user group and redirect user to panel
         # save user credential in session
         session["login"] = True
         session["account-id"] = Employee_db.id
@@ -44,6 +40,6 @@ def employee_login_post():
 
 @auth.route("/login/")
 def login_view():
-    """Other Users Login"""
+    """Users Login"""
     form = LoginForm()
     return render_template("auth/login.html", form=form)

@@ -5,13 +5,11 @@ from pathlib import Path
 BASE_DIR = Path(__file__).parent.parent
 
 # login Paths
-LOGIN_PATHS = [
-    ("employee", "کارمند"),
-    ("admin", "مدیر"),
-    ("engineer", "مهندس"),
-    ("gard", "حراست"),
-    ("office", "اداری"),
+LOGIN_PATHS_MATTERIAL = [
+    ["employee", "admin", "gard", "engineer", "office"],
+    ["کارمند", "ادمین", "حراست", "مهندس", "اداری"]
 ]
+LOGIN_PATHS = zip(LOGIN_PATHS_MATTERIAL[0], LOGIN_PATHS_MATTERIAL[1])
 
 # Path for Private Static files
 
