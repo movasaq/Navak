@@ -14,6 +14,9 @@ def create_app():
     csrf.init_app(app)
 
 
+    from navak_auth import auth
+    app.register_blueprint(auth, url_prefix="/auth")
+
     return app
 
 

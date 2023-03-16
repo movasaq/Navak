@@ -66,7 +66,7 @@ class Employee(db.Model):
 
     Created_Time = Column(DateTime(), nullable=False, default=khayyam.JalaliDatetime.now)
 
-
+    Active = Column(Boolean(), default=False)
     EmployeeTrffic = db.relationship("TrafficControl", backref="employee", lazy="True")
 
     def set_public_key(self):
@@ -85,6 +85,11 @@ class Employee(db.Model):
     def __str__(self):
         return f"{self.id}-{self.FirstName} {self.LastName}"
 
+    def set_password(self, password):
+        self.password = password
+
+    def check_password(self, password):
+        return check_password_hash(password, self.password)
 
     def CalculateVacationHour(self):
         """
