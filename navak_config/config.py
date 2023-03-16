@@ -1,13 +1,19 @@
-from pathlib import Path
 import datetime
-
+from pathlib import Path
 
 # C:\Users\Public\samane-navak  -----> root_path
 BASE_DIR = Path(__file__).parent.parent
 
+# login Paths
+LOGIN_PATHS = [
+    ("employee", "کارمند"),
+    ("admin", "مدیر"),
+    ("engineer", "مهندس"),
+    ("gard", "حراست"),
+    ("office", "اداری"),
+]
 
 # Path for Private Static files
-
 
 
 # DB INFO
