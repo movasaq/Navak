@@ -1,0 +1,149 @@
+{% extends "admin/base.html" %}
+
+{% block title %}ویرایش پروژه{% endblock %}
+
+{% block admin_styles %}
+{% endblock %}
+
+
+
+{% block admin_content %}
+    <div class="container-fluid">
+    <h3 class="text-center">ویرایش پروژه</h3>
+    <div class="row">
+        <form action="{{ url_for('admin.update_projects_post') }}" id="form-register-project" dir="rtl" method="POST">
+            <div class="col-12">
+                <label for="p_name">
+                    <span>نام پروژه را وارد کنید</span>
+                </label>
+                {{ form.name (id="p_name", class="form-control", placeholder="نام پروژه") }}
+                <p class="m-0 text-muted text-center">دقت کنید نام پروژه تکراری نباشد</p>
+            </div>
+            <div class="col-12 my-3">
+                <label for="p_amount">
+                    <span>مبلغ پروژه را وارد کنید</span>
+                </label>
+                {{ form.amount( id="p_amount", class="form-control", placeholder="مبلغ پروژه" ) }}
+            </div>
+            <div class="col-12 my-3">
+                <label for="p_type">
+                    <span>نوع پروژه را وارد کنید</span>
+                </label>
+                {{ form.p_type( id="p_type", class="form-control", placeholder="مبلغ پروژه" ) }}
+            </div>
+            <div class="col-12 my-3">
+                <label for="p_employeer">
+                    <span>نام کارفرما پروژه را وارد کنید</span>
+                </label>
+                {{ form.employeer( id="p_employeer", class="form-control", placeholder="کارفرما" ) }}
+            </div>
+            <div class="col-12 my-3">
+                <label for="p_start_date">
+                    <span>تاریخ شروع پروژه را وارد کنید</span>
+                </label>
+                {{ form.start_at( id="p_start_date", class="form-control", placeholder="تاریخ شروع" ) }}
+                <p class="text-center text-muted">فرمت تاریخ را به صورت 0000/00/00 وارد نمایید</p>
+            </div>
+            <div class="col-12 my-3">
+                <label for="p_end_date">
+                    <span>تاریخ پایان پروژه را وارد کنید</span>
+                </label>
+                {{ form.end_at( id="p_end_date", class="form-control", placeholder="تاریخ پایان" ) }}
+                <p class="text-center text-muted">فرمت تاریخ را به صورت 0000/00/00 وارد نمایید</p>
+            </div>
+            <div class="col-12 my-3">
+                <label for="p_description">
+                    <span>توضیحاتی راجب پروژه وارد کنید</span>
+                </label>
+                {{ form.description( id="p_description", class="form-control", placeholder="توضیحات" ) }}
+            </div>
+            <div class="col-12 my-3">
+                <label for="p_status">
+                    <span>وضعیت پروژه را مشخص کنید</span>
+                </label>
+                {{ form.status(id="p_status", class="form-control", placeholder="وضعیت" ) }}
+            </div>
+
+            {{ form.products( class="d-none", id="product-project" ) }}
+            {{ form.hidden_tag() }}
+            <input type="hidden" name="project-key" value="{{ form.project_key }}">
+            <div class="col-12 my-3">
+                <span>قطعات مورد نیاز پروژه: </span>
+                <div>
+                    <button type="button" class="btn btn-success open-modal-products">انتخاب از بین قطعات انبار</button>
+                </div>
+                <div class="project-products">
+                    <table class="table table-responsive table-dark table-hover table-bordered my-3">
+                        <thead>
+                        <tr>
+                            <th>قطعه</th>
+                            <th>تعداد</th>
+                        </tr>
+                        </thead>
+                        <tbody class="product-contaoner-pice">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {{ form.submit(class="btn btn-success w-100 my-3", value="بروزرسانی") }}
+        </form>
+    </div>
+
+    <div class="INFO">
+        <h3 class="text-center mt-5">توجه فرمایید</h3>
+        <p class="text-center m-0 ">در صورتی که قطعات مورد نظر پروژه در انبار موجود نیست ابتدا پروژه رو به حالت متوقف
+            شده در بیاوردید و سپس از طریق نامه نگاری به بخش مربوطه قطعات مورد نیاز را خریداری و به انبار وارد کنید و سپس
+            پروژه را ثبت نمایید</p>
+        <p class="text-center text-danger">هر پروژه دارای یک کد منحصر به فرد است که از طریف پنل پروژه ها قابل مشاهده است
+            از این کد برای جستجو و ... استفاده کنید</p>
+
+        <ul class="d-flex flex-column text-end" dir="rtl">
+            <li class="my-3">
+                <span class="m-0 h3">پروژه تحقیقاتی</span>: <span class="m-0"> این پروژه های پروژه های خود شرکت می باشد و هزینه و طراحی و ... توسط خود شرکت و به سفارش خود شرکت می باشد به عبارتی 0 تا 100 این پروژه ها توسط خود شرکت انجام می شود</span>
+            </li>
+            <li class="my-3">
+                <span class="m-0 h3">پروژه تجاری</span>: <span class="m-0">این پروژه ها به سفارش کارفرمایان یا شرکت های دیگر  می باشد و هزینه یا طراحی و ... توسط شرکت دیگه می باشد به عبارتی 0 تا 100 این پروژه را شرکت انجام نمی دهد</span>
+            </li>
+            </li>
+            <li class="my-3">
+                <span class="m-0 h3">پروژه نطامی</span>: <span class="m-0">این پروژه ها به سفارش ارگان و شرکت های وابسته نطامی دولتی می باشند</span>
+            </li>
+        </ul>
+    </div>
+
+
+    <button class="d-none" data-bs-target="#modal-products-store"
+            data-bs-toggle="modal" id="modal-products-trigger"></button>
+    <div class="modal fade" id="modal-products-store">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header w-100 d-flex justify-content-center align-items-center">
+                    <p class="m-0">قطعات موجود در انبار</p>
+                    <button class="btn btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3" dir="ltr">
+                        <i class="bi bi-search input-group-text"></i>
+                        <input type="search" dir="rtl" class="form-control search-in-products-name"
+                               placeholder=" جستجو در محصولات بر اساس نام محصول">
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row" dir="rtl" id="products-containers">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-bs-dismiss="modal">تایید</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block admin_scripts %}
+    <script src="{{ url_for('admin.static_admin', path='js/add_project.js') }}"></script>
+{% endblock %}
+
+

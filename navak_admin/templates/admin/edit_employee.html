@@ -1,0 +1,129 @@
+{% extends "admin/base.html" %}
+
+
+
+{% block title %}
+    ویرایش مشخصات حساب کاربری
+{% endblock %}
+
+{% block admin_styles %}
+{% endblock %}
+
+{% block admin_content %}
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12" dir="rtl">
+                <form action="{{ url_for('admin.edit_user_post') }}" class="my-5" id="ADD-form" method="POST">
+                    <h4 class="text-center">ویرایش مشخصات کاربر</h4>
+                    <label for="new-username" class="w-100">
+                        <p class="m-0">نام کاربری: </p>
+                        {{ form_user.username(class="form-control", id="new-username", placeholder="نام کاربری به صورت انگلیسی") }}
+                        <p class="text-center text-center text-muted">به صورت انگلیسی وارد شود: مانند alisharify</p>
+                    </label>
+                    <label for="new-password" class="w-100 border p-3 m-3 shadow">
+                        <p class="m-0 text-center">با توجه به سیاست امنیتی تمامی گذرواژه ها رمزنگاری یک طرفه میشوند و
+                            امکان مشاهده آنها توسط هیچ کسی مقدور نیست</p>
+                        <p class="m-0 text-center"> در صورت تغییر رمز عبور کاربر این فیلد را پر کنید در غیر این صورت این
+                            فیلد را خالی بگذارید</p>
+                        <p class="m-0">گذرواژه حساب کاربری: </p>
+                        {{ form_user.password(class="form-control", id="new-password",  placeholder="گذرواژه حساب کاربری") }}
+                        <p class="text-center text-center text-muted">گذرواژه ای با درجه سختی بالا انتخاب کنید</p>
+                    </label>
+                    <label for="new-persianusename" class="w-100">
+                        <p class="m-0">نام کاربری به صورت فارسی: </p>
+                        {{ form_user.public_username(class="form-control", id="new-persianusename", placeholder="نام کاربری به صورت فارسی") }}
+                        <p class="text-center text-center text-muted">این بخش به صورت فارسی وارد شود مثال: علی شریفی</p>
+                    </label>
+                    <label for="user_gp" class="w-100">
+                        <p class="m-0">گروه کاربر: </p>
+                        {{ form_user.user_group(class="form-control my-3", id="user_gp") }}
+                    </label>
+                    <label for="" class="w-100">
+                        <p class="m-0">وضعیت حساب کاربری: </p>
+                        {{ form_user.active(class="list-unstyled m-0 p-0 d-flex justify-content-around align-items-center", id="active") }}
+                        <p class="text-center text-center text-muted">مشخص کنید حساب کاربری فعال باشد یا خیر</p>
+                    </label>
+                    {{ form_user.hidden_tag() }}
+                    <input type="hidden" name="user-target" value="{{ form_user.public_key }}">
+                    {{ form_user.submit(class="btn btn-success w-100", value="بروزرسانی کاربر") }}
+
+                </form>
+            </div>
+            <div class="col-12 my-5" dir="rtl">
+                <form action="{{ url_for('admin.edit_employee_post') }}" method="POST">
+                    <label for="">
+                        <p class="m-0">آدرس: </p>
+                        {{ form.address(class="form-control") }}
+                    </label>
+                    <label for="">
+                        <p class="m-0">حقوق پایه: </p>
+                        {{ form.base_salary(class="form-control") }}
+                    </label>
+                    <label for="">
+                        <p class="m-0">تاریخ تولد: </p>
+                        {{ form.birthday(class="form-control") }}
+                    </label>
+                    <label for="">
+                        <p class="m-0">محل تولد:</p>
+                        {{ form.birth_location(class="form-control") }}
+                    </label>
+                    <label for="">
+                        <p class="m-0">نوع قرارداد:</p>
+                        {{ form.contract_type(class="form-control") }}
+                    </label>
+                    <label for="">
+                        <p class="m-0">تحصیلات: </p>
+                        {{ form.education(class="form-control") }}
+                    </label>
+                    <label for="">
+                        <p class="m-0">تلفن ضروری: </p>
+                        {{ form.emergency_tel(class="form-control") }}
+                    </label>
+                    <label for="">
+                        <p class="m-0">تاریخ شروع قرار داد:</p>
+                        {{ form.start_contract(class="form-control") }}
+                    </label>
+                    <label for="">
+                        <p class="m-0">تاریخ اتمام قرار داد:</p>
+                        {{ form.end_contract(class="form-control") }}
+                    </label>
+                    <label for="">
+                        <p class="m-0">نام:</p>
+                        {{ form.first_name(class="form-control") }}
+                    </label>
+                    <label for="">
+                        <p class="m-0">نام خانوادگی: </p>
+                        {{ form.last_name(class="form-control") }}
+                    </label>
+                    <label for="">
+                        <p class="m-0">کد ملی: </p>
+                        {{ form.meli_code(class="form-control") }}
+                    </label>
+                    <label for="">
+                        <p class="m-0">کد کارمند: </p>
+                        {{ form.staff_code(class="form-control") }}
+                    </label>
+                    <label for="">
+                        <p class="m-0">شماره تماس: </p>
+                        {{ form.phone(class="form-control") }}
+                    </label>
+                    <label for="">
+                        <p class="m-0">گروه شغلی: </p>
+                        {{ form.work_position(class="form-control") }}
+                    </label>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="user-target" value="{{ form_user.public_key }}">
+                    {{ form.submit(class="btn btn-success w-100 my-3", value="بروزرسانی کاربر") }}
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+
+{% block admin_scripts %}
+
+{% endblock %}

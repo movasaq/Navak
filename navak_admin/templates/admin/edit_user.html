@@ -1,0 +1,84 @@
+{% extends "admin/base.html" %}
+
+
+
+{% block title %}
+    ویرایش مشخصات حساب کاربری
+{% endblock %}
+
+{% block admin_styles %}
+{% endblock %}
+
+{% block admin_content %}
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12" dir="rtl">
+                <form action="{{ url_for('admin.edit_user_post') }}" class="my-5" id="ADD-form" method="POST">
+                    <h4 class="text-center">ویرایش مشخصات کاربر</h4>
+                    <label for="new-username" class="w-100">
+                        <p class="m-0">نام کاربری: </p>
+                        {{ form.username(class="form-control", id="new-username", placeholder="نام کاربری به صورت انگلیسی") }}
+                        <p class="text-center text-center text-muted">به صورت انگلیسی وارد شود: مانند alisharify</p>
+                    </label>
+                    <label for="new-password" class="w-100 border p-3 m-3 shadow">
+                        <p class="m-0 text-center">با توجه به سیاست امنیتی تمامی گذرواژه ها رمزنگاری یک طرفه میشوند و
+                            امکان مشاهده آنها توسط هیچ کسی مقدور نیست</p>
+                        <p class="m-0 text-center"> در صورت تغییر رمز عبور کاربر این فیلد را پر کنید در غیر این صورت این
+                            فیلد را خالی بگذارید</p>
+                        <p class="m-0">گذرواژه حساب کاربری: </p>
+                        {{ form.password(class="form-control", id="new-password",  placeholder="گذرواژه حساب کاربری") }}
+                        <p class="text-center text-center text-muted">گذرواژه ای با درجه سختی بالا انتخاب کنید</p>
+                    </label>
+                    <label for="new-persianusename" class="w-100">
+                        <p class="m-0">نام کاربری به صورت فارسی: </p>
+                        {{ form.public_username(class="form-control", id="new-persianusename", placeholder="نام کاربری به صورت فارسی") }}
+                        <p class="text-center text-center text-muted">این بخش به صورت فارسی وارد شود مثال: علی شریفی</p>
+                    </label>
+                    <label for="" class="w-100">
+                        <p class="m-0">وضعیت حساب کاربری: </p>
+                        {{ form.active(class="list-unstyled m-0 p-0 d-flex justify-content-around align-items-center", id="active") }}
+                        <p class="text-center text-center text-muted">مشخص کنید حساب کاربری فعال باشد یا خیر</p>
+                    </label>
+                    {{ form.hidden_tag() }}
+                    <label for="user-type" class="w-100">
+                        <p class="m-0">گروه کاربر را انتخاب کنید: </p>
+                        <select name="{{ form.user_group.name }}" id="user-type" class="form-select">
+                            {% for option in form.user_group %}
+                                {% if loop.first %}
+                                    <option disabled selected value="None">نوع کاربر را انتخاب کنید</option>
+                                {% endif %}
+                                {# set id for each select #}
+                                {{ option(id=option._value()) }}
+                            {% endfor %}
+                        </select>
+                        <p class="text-center text-center text-muted">در این بخش گروه کاربر را وارد کنید</p>
+
+                    </label>
+                    <input type="hidden" name="user-target" value="{{ form.publc_key }}">
+                    {{ form.submit(class="btn btn-success w-100", value="بروزرسانی") }}
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+
+{% block admin_scripts %}
+    <script src="{{ url_for('admin.static_admin', path='js/manage-users.js') }}"></script>
+
+    <script>
+        let loginform = document.querySelector("#ADD-form");
+        loginform.addEventListener("submit", (e) => {
+            // make sure user select type
+            if (document.querySelector("#user-type").selectedIndex == 0) {
+                window.alert("لطفا نوع کاربر را انتخاب کنید");
+                e.preventDefault();
+            } else {
+                loginform.submit();
+            }
+        })
+    </script>
+{% endblock %}

@@ -2,8 +2,9 @@ from flask import (session, render_template, redirect, url_for, flash, request)
 
 from navak_auth import auth
 from navak_auth.forms import LoginForm
-from navak_employee.models import Employee
 from navak_config.config import LOGIN_PATHS_MATTERIAL
+from navak_employee.models import Employee
+
 
 @auth.route("/login/", methods=["POST"])
 def login_post():

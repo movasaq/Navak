@@ -1,0 +1,83 @@
+{% extends "admin/base.html" %}
+
+{% block title %} مدیریت پروژه ها{% endblock %}
+
+{% block admin_styles %}
+{% endblock %}
+
+
+{% block admin_content %}
+    <div class="container-fluid">
+    <h3 class="text-center">مدیریت پروژه های سامانه</h3>
+    <div class="row">
+        <div class="col-12">
+            <a class="btn btn-success" href="{{ url_for('admin.see_all_projects') }}">مشاهده همه پروژه ها</a>
+            <a class="btn btn-success" href="{{ url_for('admin.edit_projects') }}">ویرایش پروژه</a>
+            <a href="{{ url_for('admin.register_project') }}" class="btn btn-success">ثبت پروژه جدید</a>
+        </div>
+
+
+        <div class="col-lg-4 col-md-6 col-12 my-3">
+            <div class="card shadow">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <i class="bi bi-kanban display-5 text-warning m-0 p-0"></i>
+                    <p class="m-0">وضعیت تمام پروژه های موجود</p>
+                </div>
+                <div class="card-body p-0 m-1">
+                    <canvas class="w-100 p-0 m-0" id="all_projects_status" style="height: 400px;"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-12 my-3">
+            <div class="card shadow">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <i class="bi bi-kanban display-5 text-warning m-0 p-0"></i>
+                    <p class="m-0">مجموع نوع پروژه های انجام شده</p>
+                </div>
+                <div class="card-body p-0 m-1">
+                    <canvas class="w-100 p-0 m-0" id="going-projects-chart" style="height: 400px;"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="col-lg-4 col-md-6 col-12 my-3">
+    <div class="card shadow">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <i class="bi bi-kanban display-5 text-warning m-0 p-0"></i>
+            <p class="m-0">مجموع  درصد پیشرفت پروژه ها</p>
+        </div>
+        <div class="card-body p-0 m-1">
+            <canvas class="w-100 p-0 m-0" id="grouth-projects-chart" style="height: 400px;"></canvas>
+        </div>
+    </div>
+</div> -->
+
+    </div>
+
+    <div class="INFO">
+        <h3 class="text-center mt-5">توجه فرمایید</h3>
+        <ul class="d-flex flex-column text-end" dir="rtl">
+            <li class="my-3">
+                <span class="m-0 h3">پروژه تحقیقاتی</span>: <span class="m-0"> این پروژه های پروژه های خود شرکت می باشد و هزینه و طراحی و ... توسط خود شرکت و به سفارش خود شرکت می باشد به عبارتی 0 تا 100 این پروژه ها توسط خود شرکت انجام می شود</span>
+            </li>
+            <li class="my-3">
+                <span class="m-0 h3">پروژه تجاری</span>: <span class="m-0">این پروژه ها به سفارش کارفرمایان یا شرکت های دیگر  می باشد و هزینه یا طراحی و ... توسط شرکت دیگه می باشد به عبارتی 0 تا 100 این پروژه را شرکت انجام نمی دهد</span>
+            </li>
+            </li>
+            <li class="my-3">
+                <span class="m-0 h3">پروژه نطامی</span>: <span class="m-0">این پروژه ها به سفارش ارگان و شرکت های وابسته نطامی دولتی می باشند</span>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+
+{% block admin_scripts %}
+    <script src="{{ url_for('static', filename='assets/chart.js') }}"></script>
+
+    <script src="{{ url_for('admin.static_admin', path='js/projects.js') }}"></script>
+
+{% endblock %}
+
+

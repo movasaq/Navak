@@ -14,7 +14,7 @@ class Education(db.Model):
     __tablename__ = "navak_education_degree"
     id = Column(Integer(), primary_key=True)
     Name = Column(String(64), nullable=False)
-    employee = db.relationship("Employee", backref="Education", lazy="True")
+    employee = db.relationship("Employee", backref="education", lazy=True)
 
 
 class WorkPosition(db.Model):
@@ -24,7 +24,7 @@ class WorkPosition(db.Model):
     __tablename__ = "navak_work_position"
     id = Column(Integer(), primary_key=True)
     Name = Column(String(64), nullable=False)
-    employee = db.relationship("Employee", backref="WorkPosition", lazy="True")
+    employee = db.relationship("Employee", backref="workposition", lazy=True)
 
 
 
@@ -68,7 +68,7 @@ class Employee(db.Model):
     Created_Time = Column(DateTime(), nullable=False, default=khayyam.JalaliDatetime.now)
 
     Active = Column(Boolean(), default=False)
-    EmployeeTrffic = db.relationship("TrafficControl", backref="employee", lazy="True")
+    EmployeeTrffic = db.relationship("TrafficControl", backref="employee", lazy=True)
 
     def set_public_key(self):
         """

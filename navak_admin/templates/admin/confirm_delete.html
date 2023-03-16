@@ -1,0 +1,63 @@
+{% extends "admin/base.html" %}
+
+
+
+{% block title %}
+    حذف حساب کاربری
+{% endblock %}
+
+{% block admin_styles %}
+{% endblock %}
+
+{% block admin_content %}
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12" dir="rtl">
+                <h4 class="text-center my-5">تایید حذف حساب کاربری</h4>
+                <p class="text-center">ادمین گرامی آیا از حذف کاربر زیر اطمینان دارید؟ </p>
+
+                <table class="table table-responsive table-bordered table-primary table-hover shadow-sm my-5">
+                    <thead>
+                    <tr>
+                        <th>نام کاربری</th>
+                        <th>تاریخ ساخت</th>
+                        <th>وضعیت</th>
+                        <th>گروه کاربر</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ content.user.username }}</td>
+                        <td>{{ content.user.created_at }}</td>
+                        <td>{{ content.user.active }}</td>
+                        <td>{{ content.user.user_group }}</td>
+                    </tr>
+                    </tbody>
+
+                </table>
+
+
+                <form action="{{ url_for('admin.delete_user_register') }}" method="POST"
+                      class="d-flex justify-content-center align-items-center">
+                    <input type="hidden" value="{{ content.user.public_key }}" name="user-key">
+                    <input type="hidden" value="{{ csrf_token() }}" name="csrf_token">
+
+                    <input type="submit" class="btn btn-success mx-2 px-4 py-2" value="تایید">
+                    <a class="btn btn-primary mx-2 px-4 py-2" href="{{ url_for('admin.manage_users') }}">لغو</a>
+                </form>
+
+                <div class="info my-4 text-center text-muted">
+                    <p>با این عمل کاربر به حالت غیر فعال تبدیل می شود و برای دسترسی باید با ویرایش اکانت به حالت فعال در
+                        آورده شود</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block admin_scripts %}
+{% endblock %}

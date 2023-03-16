@@ -15,7 +15,7 @@ class Role(db.Model):
     id = Column(Integer(), primary_key=True)
     RoleName = Column(String(64))
     RoleDescription = Column(String(256))
-    Users = db.relationship("User", backref="Role", lazy="True")
+    Users = db.relationship("User", backref="Role", lazy=True)
 
 
 class User(db.Model):

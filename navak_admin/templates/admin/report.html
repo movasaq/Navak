@@ -1,0 +1,62 @@
+{% extends "admin/base.html" %}
+
+
+
+{% block title %}
+    گزارشات سامانه
+{% endblock %}
+
+{% block admin_styles %}
+{% endblock %}
+
+{% block admin_content %}
+    <div class="container-fluid">
+        <h4 class="text-center">گزارشات سامانه</h4>
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <i class="bi bi-kanban display-5 text-warning m-0 p-0"></i>
+                        <p class="m-0">گزارشات بخش های مختلف در یک ماه گذشته</p>
+                    </div>
+                    <div class="card-body p-0 m-1 d-flex justify-content-center align-items-center"
+                         style="height: 400px;">
+                        <canvas class=" p-0 m-0 " id="work_report_sections"></canvas>
+                    </div>
+                </div>
+                <div class="report-info my-5">
+                    <p class="text-center m-0 h3">معیار آمار</p>
+                    <p class="text-center m-0">در این بخش گزارش نویسی بخش های مختلف را مشاهده می کنید </p>
+                    <p class="text-center m-0">توجه فرمایید دردصد هر بخش بر اساس تعداد گزارش نویسی و <span
+                            class="text-danger">تعداد افراد</span> مشغول در آن بخش محاسبه می شود</p>
+                </div>
+                <hr class="my-5">
+            </div>
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <i class="bi bi-kanban display-5 text-warning m-0 p-0"></i>
+                        <p class="m-0">محصولات وارد شده به انبار در هفته اخیر</p>
+                    </div>
+                    <div class="card-body p-0 m-1">
+                        <canvas class="w-100 p-0 m-0" id="out-store-chart" style="height: 400px;"></canvas>
+                    </div>
+                </div>
+                <div class="report-info my-5">
+                    <p class="text-center m-0 h3">معیار آمار</p>
+                    <p class="text-center m-0">در این بخش آمار قطعات <span class="text-danger">خارج</span> و <span
+                            class="text-danger">وارد</span> شده در انبار را در یک هفته اخیر مشاهده می کنید </p>
+                    <p class="text-center m-0">آمار فوق به طور مستقیم از بخش انباری تهیه شده است و تعداد خروجی و ورودی
+                        قطعات به دست آمده است</p>
+                </div>
+                <hr class="my-5">
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block admin_scripts %}
+    <script src="{{ url_for('static', filename='assets/chart.js') }}"></script>
+    <script src="{{ url_for('admin.static_admin', path='js/report.js') }}"></script>
+{% endblock %}

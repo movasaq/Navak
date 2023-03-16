@@ -1,0 +1,141 @@
+{% extends "admin/base.html" %}
+
+{% block title %}تمام پروژه ها{% endblock %}
+
+{% block admin_styles %}
+{% endblock %}
+
+
+
+{% block admin_content %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                {% if content.search == "در حال انجام" %}
+                    <h4 class="text-center my-4">تمام پروژه های در وضعیت <span class="text-danger">در حال انجام</span>
+                        موجود در سامانه</h4>
+                {% elif content.search == "پایان یافته" %}
+                    <h4 class="text-center my-4">تمام پروژه های در وضعیت <span class="text-danger">پایان یافته</span>
+                        موجود در سامانه</h4>
+                {% elif content.search == "متوقف شده" %}
+                    <h4 class="text-center my-4">تمام پروژه های در وضعیت <span class="text-danger">متوقف شده</span>
+                        موجود در سامانه</h4>
+                {% elif content.search == "نظامی" %}
+                    <h4 class="text-center my-4">تمام پروژه های در وضعیت <span class="text-danger">نظامی</span> موجود در
+                        سامانه</h4>
+                {% elif content.search == "تجاری" %}
+                    <h4 class="text-center my-4">تمام پروژه های در وضعیت <span class="text-danger">تجاری</span> موجود در
+                        سامانه</h4>
+                {% elif content.search == "تحقیقاتی" %}
+                    <h4 class="text-center my-4">تمام پروژه های در وضعیت <span class="text-danger">تحقیقاتی</span> موجود
+                        در سامانه</h4>
+                {% else %}
+                    <h4 class="text-center my-4">تمام پروژه های موجود در سامانه</h4>
+                {% endif %}
+            </div>
+
+            <table class="table table-dark table-responsive table-bordered table-hover text-end">
+                <thead>
+                <tr>
+                    <th>وضعیت پروژه</th>
+                    <th>نوع پروژه</th>
+                    <th>کد پیگیری پروژه</th>
+                    <th>نام پروژه</th>
+                    <th>ردیف</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if content.projects %}
+                    {% for p in content.projects %}
+                        <tr class="table-row" data-target="{{ p.public_key }}">
+                            <td>{{ p.status }}</td>
+                            <td>{{ p.p_type }}</td>
+                            <td>{{ p.id }}</td>
+                            <td>{{ p.name }}</td>
+                            <td>{{ loop.index + (content.curent_page - 1) * 10 }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+
+
+            {# pagination for posts #}
+            {% if content.projects.iter_pages() %}
+                <div class="paginate-news">
+                    <ul class="pagination justify-content-center" style="direction: ltr;">
+                        {% for page in content.projects.iter_pages(right_edge=1, left_edge=1, right_current=2, left_current=2) %}
+
+                            {% if page %}
+                                {# find current page and active the pagination #}
+                                {% if content.curent_page == page %}
+                                    <li class="page-item active"><a
+                                            href="{{ url_for('admin.see_all_projects', page=page, filter=content.search) }}"
+                                            class="page-link">{{ page }}</a></li>
+                                {% else %}
+                                    <li class="page-item"><a
+                                            href="{{ url_for('admin.see_all_projects', page=page, filter=content.search) }}"
+                                            class="page-link">{{ page }}</a></li>
+                                {% endif %}
+                            {% else %}
+                                <li class="page-item"><a class="page-link">...</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+
+            <div class="pb-5">
+                <h4 class="text-center mt-5">جستجو پیشرفته</h4>
+                <p class="text-center"> در این قسمت بر اساس فیلتر میتوانید پروژه های سامانه را مشاهده نمایید</p>
+                <form action="{{ url_for('admin.see_all_projects') }}" class="pb-5" method="GET">
+                    <p class="m-0 mt-5 text-end">پروژه هایی که در وضعیت</p>
+                    <select class="form-select" name="filter" dir="rtl" id="">
+                        <option disabled selected>معیار انتخاب</option>
+                        <option value="نظامی">نظامی</option>
+                        <option value="تجاری">تجاری</option>
+                        <option value="تحقیقاتی">تحقیقاتی</option>
+                        <option value="در حال انجام">در حال انجام</option>
+                        <option value="متوقف شده">متوقف شده</option>
+                        <option value="پایان یافته">پایان یافته</option>
+                    </select>
+                    <button type="submit" class="btn btn-success w-100 my-3">گزارش</button>
+                </form>
+            </div>
+
+
+            <div class="INFO">
+                <h3 class="text-center mt-5">توجه فرمایید</h3>
+                <p class="text-center m-0 ">در صورتی که قطعات مورد نظر پروژه در انبار موجود نیست ابتدا پروژه رو به حالت
+                    متوقف شده در بیاوردید و سپس از طریق نامه نگاری به بخش مربوطه قطعات مورد نیاز را خریداری و به انبار
+                    وارد کنید و سپس پروژه را ثبت نمایید</p>
+                <p class="text-center text-danger">هر پروژه دارای یک کد منحصر به فرد است که از طریف پنل پروژه ها قابل
+                    مشاهده است از این کد برای جستجو و ... استفاده کنید</p>
+
+                <ul class="d-flex flex-column text-end" dir="rtl">
+                    <li class="my-3">
+                        <span class="m-0 h3">پروژه تحقیقاتی</span>: <span class="m-0"> این پروژه های پروژه های خود شرکت می باشد و هزینه و طراحی و ... توسط خود شرکت و به سفارش خود شرکت می باشد به عبارتی 0 تا 100 این پروژه ها توسط خود شرکت انجام می شود</span>
+                    </li>
+                    <li class="my-3">
+                        <span class="m-0 h3">پروژه تجاری</span>: <span class="m-0">این پروژه ها به سفارش کارفرمایان یا شرکت های دیگر  می باشد و هزینه یا طراحی و ... توسط شرکت دیگه می باشد به عبارتی 0 تا 100 این پروژه را شرکت انجام نمی دهد</span>
+                    </li>
+                    </li>
+                    <li class="my-3">
+                        <span class="m-0 h3">پروژه نطامی</span>: <span class="m-0">این پروژه ها به سفارش ارگان و شرکت های وابسته نطامی دولتی می باشند</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block admin_scripts %}
+    <script src="{{ url_for('admin.static_admin', path='js/all_projects.js') }}"></script>
+{% endblock %}
+
+

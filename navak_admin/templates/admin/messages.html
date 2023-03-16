@@ -1,0 +1,21 @@
+{% extends "admin/base.html" %}
+
+{% block title %}پیام{% endblock %}
+
+{% block admin_style %}
+{% endblock %}
+
+
+{% block admin_content %}
+
+    {% include "sections/admin-message.html" %}
+
+{% endblock %}
+
+
+{% block admin_scripts %}
+    <!-- public js code -->
+    <script src="{{ url_for('static_public', path='JS/messages.js') }}"></script>
+    <!-- admin message code -->
+    <script src="{{ url_for('admin.static_admin', path='js/admin_message.js') }}"></script>
+{% endblock %}

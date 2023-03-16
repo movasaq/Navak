@@ -1,0 +1,124 @@
+{% extends "admin/base.html" %}
+
+{% block title %}جزییات پروژه {{ content.project.name }}{% endblock %}
+
+{% block admin_styles %}
+{% endblock %}
+
+
+
+{% block admin_content %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="text-center mt-5">جزییات پروژه {{ content.project.name }}</h4>
+            </div>
+            <table class="table table-responsive table-dark table-hover table-bordered">
+                <tbody class="text-end">
+                <tr>
+                    <td>{{ content.project.name }}</td>
+                    <td>نام پروژه</td>
+                </tr>
+                <tr>
+                    <td>{{ content.project.start_at.date() }}</td>
+                    <td>تاریخ شروع</td>
+                </tr>
+                <tr>
+                    <td>{{ content.project.end_at.date() }}</td>
+                    <td>تاریخ پایان</td>
+                </tr>
+                <tr>
+                    <td>{{ content.project.amount }}</td>
+                    <td>بودجه تقریبی</td>
+                </tr>
+                <tr>
+                    <td>{{ content.project.employer }}</td>
+                    <td>کارفرما</td>
+                </tr>
+                <tr>
+                    <td>{{ content.project.p_type }}</td>
+                    <td>نوع پروژه</td>
+                </tr>
+                <tr>
+                    <td>{{ content.project.status }}</td>
+                    <td>وضعیت پروژه</td>
+                </tr>
+                <tr>
+                    <td>{{ content.project.description }}</td>
+                    <td>توضحات پروژه</td>
+                </tr>
+
+                </tbody>
+            </table>
+            <div class="col-12">
+                <h4 class="text-center mt-5">قطعات مورد نیاز پروژه {{ content.project.name }}</h4>
+            </div>
+            <table class="table table-responsive table-dark table-hover table-bordered text-end">
+                <thead>
+                <tr>
+                    <th>پارت نامبر</th>
+                    <th>موجودیت</th>
+                    <th>نام قطعه</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for p in content.products %}
+                    <tr>
+                        <td>{{ p.partnumber }}</td>
+                        <td>{{ p.qty }}</td>
+                        <td>{{ p.name }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <h4 class="text-center mt-5">محصولات مرتبط با این پروژه که از انبار خارج شده است</h4>
+            <table dir="rtl" class="table table-dark table-responsive table-hover table-bordered text-end">
+                <thead>
+                <tr>
+                    <th>توضیحات</th>
+                    <th>تاریخ</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for each in content.exits %}
+                    <tr>
+                        <td>{{ each.description | replace("\n", "<br>") | safe }}</td>
+                        <td>{{ each.exit_date.date() }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <h4 class="text-center mt-5">وضعیت پروژه</h4>
+            <table dir="rtl" class="table table-dark table-responsive table-hover table-bordered text-end">
+                <thead>
+                <tr>
+                    <th>توسط</th>
+                    <th>وضعیت</th>
+                    <th>تاریخ</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for each in content.comments %}
+                    <tr>
+                        <td>{{ each.by | user_name }}</td>
+                        <td style="text-align:justify; word-break: normal;">{{ each.description }}</td>
+                        <td>{{ each.date.date() }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block admin_scripts %}
+{% endblock %}
+
+

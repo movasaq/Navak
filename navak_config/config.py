@@ -12,9 +12,7 @@ LOGIN_PATHS_MATTERIAL = [
 LOGIN_PATHS = zip(LOGIN_PATHS_MATTERIAL[0], LOGIN_PATHS_MATTERIAL[1])
 
 # Path for Private Static files
-from navak_config.utils import load_roles
 
-print(load_roles())
 
 # DB INFO
 USERNAME_DB = "navak"
