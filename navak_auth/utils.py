@@ -9,7 +9,6 @@ from navak_employee.models import Employee
 def employee_login_required(func):
     """
         Decorator for
-
     :return: User Object from db
     """
     @wraps(func)
