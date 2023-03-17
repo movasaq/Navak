@@ -38,13 +38,30 @@ def setup():
 
     import navak_auth.models as models
     for each in roles:
-        print(each)
-
         role = models.Role()
         role.RoleName = each["role-en"]
         role.RoleDescription = each["role-fa"]
         role.id = each["role-id"]
+        try:
+            db.session.add(role)
+            db.session.commit()
+        except:
+            db.session.rollback()
 
-        db.session.add(role)
+    UsrRole = models.Role.query.filter(models.Role.RoleName == "admin").first()
+
+    usr = models.User()
+    usr.username = "alisahrify"
+    usr.set_password("123654")
+    usr.FullName = "علی شریفی"
+    usr.set_public_key()
+    usr.UserRole = UsrRole.id
+    usr.Active = True
+
+    try:
+        db.session.add(usr)
         db.session.commit()
+    except:
+        db.session.rollback()
+
     return "OK"
