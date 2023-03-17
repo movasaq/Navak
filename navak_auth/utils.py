@@ -12,7 +12,6 @@ def employee_login_required(func):
 
     :return: User Object from db
     """
-
     @wraps(func)
     def inner_func(*args, **kwargs):
         if not (account_id := session.get("account-id", None)):
@@ -28,9 +27,7 @@ def employee_login_required(func):
             session.clear()
             abort(401)
 
-
         return func(employee_db=employee_db, *args, **kwargs)
-
     return inner_func
 
 
@@ -40,7 +37,6 @@ def admin_login_required(func):
 
     :return: User Object from db
     """
-
     @wraps(func)
     def inner_func(*args, **kwargs):
         if not (account_id := session.get("account-id", None)):
@@ -66,7 +62,6 @@ def admin_login_required(func):
             abort(401)
 
         return func(*args, **kwargs)
-
     return inner_func
 
 
@@ -75,7 +70,6 @@ def basic_login_required(func):
         only check user have account id and its valid
     :return:
     """
-
     @wraps(func)
     def inner_func(*args, **kwargs):
         if not (account_id := session.get("account-id", None)):
@@ -91,5 +85,4 @@ def basic_login_required(func):
             abort(401)
 
         return func(*args, **kwargs)
-
     return inner_func

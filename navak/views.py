@@ -1,8 +1,7 @@
 import datetime
 import os
 
-from flask import render_template, send_from_directory
-from flask import request
+from flask import render_template, send_from_directory, request
 
 from navak import app
 from navak.extensions import db
@@ -38,7 +37,6 @@ def error_404(e):
 def login_public_static(path):
     """
     this view only serve static file to users that login to there account
-
     :return: static file
     """
     if os.path.exists(os.path.join(config.LOGIN_PUBLIC_STATIC, path)):
