@@ -1,7 +1,5 @@
 from functools import wraps
-
 from flask import session, abort
-
 from navak_auth.models import User, Role
 from navak_employee.models import Employee
 
