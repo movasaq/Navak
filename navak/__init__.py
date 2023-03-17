@@ -20,6 +20,9 @@ def create_app():
     from navak_gard import gard
     app.register_blueprint(gard, url_prefix="/gard")
 
+    from navak_admin import admin
+    app.register_blueprint(admin, url_prefix="/admin")
+
     return app
 
 

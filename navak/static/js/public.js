@@ -56,9 +56,4 @@ function jalali_to_gregorian(jy, jm, jd) {
   }
 
 
-let today = new Date();
-let jalali = gregorian_to_jalali(today.getFullYear(), today.getMonth() + 1, today.getDate())
-document.querySelector(".jalali-date").textContent = `${jalali[0]}/${jalali[1]}/${jalali[2]}`
-document.querySelector(".miladi-date").textContent = `${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()} `
-
 

@@ -29,5 +29,4 @@ class LoginForm(FlaskForm):
     usergroup = SelectField(
         choices=config.LOGIN_PATHS
     )
-
     submit = SubmitField()

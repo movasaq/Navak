@@ -5,7 +5,7 @@
 
 
 {% block styles %}
-    <link rel="stylesheet" href="{{ url_for('static_public', path='CSS/public.css') }}">
+    <link rel="stylesheet" href="{{ url_for('login_public_static', path='css/logins_public.css') }}">
     {% block admin_styles %}
     {% endblock %}
 {% endblock %}
@@ -19,7 +19,7 @@
                         <!-- header -->
                         <div class="col-12 d-flex justify-content-between align-items-center my-4">
                             <div class="d-flex align-items-center">
-                                <span class="mx-1 bg-white px-2 py-2 rounded-3 persian-date-now"></span>
+                                <span class="mx-1 bg-white px-2 py-2 rounded-3 persian-date-now">00/00/00</span>
                                 <span class="ms-1 bg-white px-2 py-2 rounded-3 persian-time-now">00:00</span>
                             </div>
                             <div>
@@ -32,8 +32,8 @@
                     </div>
                 </div>
             </div>
-            <!-- side bar menu -->
-            <div class="col-md-4 col-lg-3 col-7 col-sm-6 order-md-last order-first p-0 m-0 position-fixed top-0 bottom-0 end-0 menu-container"
+            <!-- sidebar menu -->
+            <div class="col-md-4 col-lg-3 col-7 col-sm-6 order-md-last order-first p-0 m-0 position-fixed top-0 bottom-0 end-0 menu-container "
                  style="height:100vh;">
                 <aside class="p-0 m-0 h-100 bg-dark text-white d-flex flex-column ">
                     <!-- header menu -->
@@ -43,8 +43,7 @@
                                     class="bi bi-arrow-right"></i></button>
                         </div>
                         <div>
-                            <img width="80px" height="80px" class="rounded-circle navak-asie-header-img"
-                                 src="{{ url_for('users_profile_images') }}" alt="">
+                            <img width="80px" height="80px" class="rounded-circle navak-aside-header-img" src="" alt="">
                         </div>
                     </div>
                     <!-- end of header menu -->
@@ -52,13 +51,13 @@
                     <div class="menu-buttons my-5 menu-bottons-aside">
 
                         {% if content.page == "dashboard" %}
-                            <a href="{{ url_for('admin.index_view') }}"
+                            <a href=""
                                class="d-flex text-decoration-none text-white justify-content-end align-items-center my-2 p-3 border-end-brand menu-selected">
                                 <span class="me-3 hidden-btn-menu">داشبورد</span>
                                 <i class="bi bi-list fs-3 mt-2"></i>
                             </a>
                         {% else %}
-                            <a href="{{ url_for('admin.index_view') }}"
+                            <a href=""
                                class="d-flex text-decoration-none text-white justify-content-end align-items-center my-2 p-3 border-end-brand border-hover">
                                 <span class="me-3 hidden-btn-menu">داشبورد</span>
                                 <i class="bi bi-list fs-3 mt-2"></i>
@@ -66,13 +65,13 @@
                         {% endif %}
 
                         {% if content.page == "manage-users" %}
-                            <a href="{{ url_for('admin.manage_users') }}"
+                            <a href=""
                                class="d-flex  text-decoration-none text-white justify-content-end align-items-center my-2 p-3 border-end-brand menu-selected">
                                 <span class="me-3 hidden-btn-menu">مدیریت کاربران</span>
                                 <i class="bi bi-plus-circle-fill"></i>
                             </a>
                         {% else %}
-                            <a href="{{ url_for('admin.manage_users') }}"
+                            <a href=""
                                class="d-flex  text-decoration-none text-white justify-content-end align-items-center my-2  p-3  border-end-brand border-hover">
                                 <span class="me-3 hidden-btn-menu">مدیریت کاربران</span>
                                 <i class="bi bi-plus-circle-fill"></i>
@@ -80,7 +79,7 @@
                         {% endif %}
 
                         {% if content.page == "messages" %}
-                            <a href="{{ url_for('admin.messages_view') }}"
+                            <a href=""
                                class="d-flex flex-row-reverse text-decoration-none text-white justify-content-between align-items-center my-2 p-3 border-end-brand menu-selected">
                                 <div>
                                     <span class="me-3 hidden-btn-menu">مکاتبات</span>
@@ -88,7 +87,7 @@
                                 </div>
                             </a>
                         {% else %}
-                            <a href="{{ url_for('admin.messages_view') }}"
+                            <a href=""
                                class="d-flex flex-row-reverse text-decoration-none text-white justify-content-between align-items-center my-2 p-3 border-end-brand border-hover">
                                 <div>
                                     <span class="me-3 hidden-btn-menu">مکاتبات</span>
@@ -98,7 +97,7 @@
                         {% endif %}
 
                         {% if content.page == "projects" %}
-                            <a href="{{ url_for('admin.manage_project') }}"
+                            <a href=""
                                class="d-flex flex-row-reverse text-decoration-none text-white justify-content-between align-items-center my-2 p-3 border-end-brand menu-selected">
                                 <div>
                                     <span class="me-3 hidden-btn-menu">مدیریت پروژه ها</span>
@@ -106,7 +105,7 @@
                                 </div>
                             </a>
                         {% else %}
-                            <a href="{{ url_for('admin.manage_project') }}"
+                            <a href=""
                                class="d-flex flex-row-reverse text-decoration-none text-white justify-content-between align-items-center my-2 p-3 border-end-brand border-hover">
                                 <div>
                                     <span class="me-3 hidden-btn-menu">مدیریت پروژه ها</span>
@@ -117,27 +116,27 @@
 
 
                         {% if content.page ==  "status" %}
-                            <a href="{{ url_for('admin.report_view') }}"
-                               class="d-flex  text-decoration-none text-white justify-content-end align-items-center my-2  p-3  border-end-brand menu-selected">
+                            <a href=""
+                               class="d-flex text-decoration-none text-white justify-content-end align-items-center my-2 p-3 border-end-brand menu-selected">
                                 <span class="me-3 hidden-btn-menu">گزارشات</span>
                                 <i class="bi bi-clipboard-check-fill"></i>
                             </a>
                         {% else %}
-                            <a href="{{ url_for('admin.report_view') }}"
-                               class="d-flex  text-decoration-none text-white justify-content-end align-items-center my-2  p-3  border-end-brand border-hover">
+                            <a href=""
+                               class="d-flex  text-decoration-none text-white justify-content-end align-items-center my-2 p-3 border-end-brand border-hover">
                                 <span class="me-3 hidden-btn-menu">گزارشات</span>
                                 <i class="bi bi-clipboard-check-fill"></i>
                             </a>
                         {% endif %}
 
                         {% if content.page == "setting" %}
-                            <a href="{{ url_for('admin.setting_view') }}"
-                               class="d-flex  text-decoration-none text-white justify-content-end align-items-center my-2  p-3 border-end-brand menu-selected">
+                            <a href=""
+                               class="d-flex  text-decoration-none text-white justify-content-end align-items-center my-2 p-3 border-end-brand menu-selected">
                                 <span class="me-3 hidden-btn-menu">تنظیمات</span>
                                 <i class="bi bi-gear-fill"></i>
                             </a>
                         {% else %}
-                            <a href="{{ url_for('admin.setting_view') }}"
+                            <a href=""
                                class="d-flex  text-decoration-none text-white justify-content-end align-items-center my-2  p-3 border-end-brand border-hover">
                                 <span class="me-3 hidden-btn-menu">تنظیمات</span>
                                 <i class="bi bi-gear-fill"></i>
@@ -186,7 +185,7 @@
 
 
 {% block scripts %}
-    <script src="{{ url_for('static_public', path='JS/public.js') }}"></script>
+    <script src="{{ url_for('login_public_static', path='js/logins_public.js') }}"></script>
     {% block admin_scripts %}
     {% endblock %}
 {% endblock %}

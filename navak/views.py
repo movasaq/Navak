@@ -1,10 +1,13 @@
 import datetime
+import os
 
-from flask import render_template
+from flask import render_template, send_from_directory
 from flask import request
 
 from navak import app
 from navak.extensions import db
+from navak_auth.utils import basic_login_required
+from navak_config import config as config
 
 
 @app.route("/")
@@ -28,6 +31,20 @@ def error_404(e):
         "time": datetime.datetime.now(),
     }
     return render_template("errors/404.html", content=content)
+
+
+@app.route("/login/public/static/<path:path>")
+@basic_login_required
+def login_public_static(path):
+    """
+    this view only serve static file to users that login to there account
+
+    :return: static file
+    """
+    if os.path.exists(os.path.join(config.LOGIN_PUBLIC_STATIC, path)):
+        return send_from_directory(config.LOGIN_PUBLIC_STATIC, path)
+    else:
+        return "File Not Found", 404
 
 
 @app.route("/setup")

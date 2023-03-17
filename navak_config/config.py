@@ -9,10 +9,10 @@ LOGIN_PATHS_MATTERIAL = [
     ["employee", "admin", "gard", "engineer", "office"],
     ["کارمند", "ادمین", "حراست", "مهندس", "اداری"]
 ]
-LOGIN_PATHS = zip(LOGIN_PATHS_MATTERIAL[0], LOGIN_PATHS_MATTERIAL[1])
+LOGIN_PATHS = [each for each in zip(LOGIN_PATHS_MATTERIAL[0], LOGIN_PATHS_MATTERIAL[1])]
 
-# Path for Private Static files
-
+# Static files Path
+LOGIN_PUBLIC_STATIC = BASE_DIR / "navak" / "logins_public"
 
 # DB INFO
 USERNAME_DB = "navak"
