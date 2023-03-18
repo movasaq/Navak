@@ -1,6 +1,9 @@
 import datetime
 from pathlib import Path
 
+# allowed file extensions
+ALLOWED_EXT_IMG = ["jpg", "png"]
+
 # C:\Users\Public\samane-navak  -----> root_path
 BASE_DIR = Path(__file__).parent.parent
 
@@ -13,6 +16,7 @@ LOGIN_PATHS = [each for each in zip(LOGIN_PATHS_MATTERIAL[0], LOGIN_PATHS_MATTER
 
 # Static files Path
 LOGIN_PUBLIC_STATIC = BASE_DIR / "navak" / "logins_public"
+MEDIA_FOLDER = BASE_DIR / "navak_media"
 
 # DB INFO
 USERNAME_DB = "navak"

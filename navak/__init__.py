@@ -23,6 +23,9 @@ def create_app():
     from navak_admin import admin
     app.register_blueprint(admin, url_prefix="/admin")
 
+    from navak_setting import setting
+    app.register_blueprint(setting, url_prefix="/setting")
+
     return app
 
 
