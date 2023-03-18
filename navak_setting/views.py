@@ -1,7 +1,7 @@
 import os.path
 import uuid
 
-from flask import request, session, abort, jsonify
+from flask import request, session, abort, jsonify, send_from_directory
 from werkzeug.utils import secure_filename
 
 import navak_auth.models as UserModel
@@ -9,6 +9,23 @@ from navak.extensions import db
 from navak_auth.utils import basic_login_required
 from navak_config.config import ALLOWED_EXT_IMG, MEDIA_FOLDER
 from navak_setting import setting
+
+
+@setting.route("/image/", methods=["GET"])
+@basic_login_required
+def serve_user_image():
+    """
+    this view serve user image profile
+    :return: Media/Image
+    """
+    if not (user_db := UserModel.User.query.filter(UserModel.User.id == session.get("account-id")).first()):
+        session.clear()
+        abort(401)
+
+    if os.path.exists(os.path.join(MEDIA_FOLDER, "profiles", user_db.ProfileImage)):
+        return send_from_directory(os.path.join(MEDIA_FOLDER, "profiles"), user_db.ProfileImage)
+    else:
+        return "File Not Found!", 404
 
 
 @setting.route("/change/avatar/", methods=["GET"])
