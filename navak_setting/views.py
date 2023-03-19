@@ -1,7 +1,7 @@
 import os.path
 import uuid
 
-from flask import request, session, abort, send_from_directory, redirect, flash
+from flask import request, session, abort, send_from_directory, redirect, flash, jsonify
 from werkzeug.utils import secure_filename
 
 import navak_auth.models as UserModel
@@ -152,3 +152,22 @@ def change_user_tag():
     else:
         flash("عملیات با موفقیت انجام شد", "success")
         return redirect(request.referrer)
+
+
+@setting.route("/_user/", methods=["POST"])
+@basic_login_required
+def get_user_data():
+    """
+        this view return user data in json format
+    :return: JSON
+    """
+    if not (user_db := UserModel.User.query.filter(UserModel.User.id == session.get("account-id")).first()):
+        session.clear()
+        return jsonify({"status": "failed", "message": "invalid user"}), 401
+
+    data = {}
+    data["username"] = user_db.username
+    data["group"] = user_db.Role.RoleName
+    data["user_tag"] = user_db.Usertag
+
+    return jsonify({"status": "success", "data": data}), 200
