@@ -131,14 +131,14 @@
                         {% endif %}
 
                         {% if content.page == "setting" %}
-                            <a href=""
-                               class="d-flex  text-decoration-none text-white justify-content-end align-items-center my-2 p-3 border-end-brand menu-selected">
+                            <a href="{{ url_for('admin.setting') }}"
+                               class="d-flex text-decoration-none text-white justify-content-end align-items-center my-2 p-3 border-end-brand menu-selected">
                                 <span class="me-3 hidden-btn-menu">تنظیمات</span>
                                 <i class="bi bi-gear-fill"></i>
                             </a>
                         {% else %}
-                            <a href=""
-                               class="d-flex  text-decoration-none text-white justify-content-end align-items-center my-2  p-3 border-end-brand border-hover">
+                            <a href="{{ url_for('admin.setting') }}"
+                               class="d-flex text-decoration-none text-white justify-content-end align-items-center my-2  p-3 border-end-brand border-hover">
                                 <span class="me-3 hidden-btn-menu">تنظیمات</span>
                                 <i class="bi bi-gear-fill"></i>
                             </a>

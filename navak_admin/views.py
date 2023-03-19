@@ -11,3 +11,12 @@ def index_view():
         "page": "dashboard"
     }
     return render_template("admin/index.html", content=content)
+
+
+@admin.route("/setting")
+@admin_login_required
+def setting():
+    content = {
+        "page": "setting"
+    }
+    return render_template("admin/setting.html", content=content)
