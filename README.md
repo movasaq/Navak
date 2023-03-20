@@ -30,4 +30,7 @@
 
 # TODO:
 
-- [ ] - Fix Auth app for Login users and redirect them to there panel 
+- [x] 
+    - Fix Auth app for Login users and redirect them to there panel
+- [ ] 
+    - Finish manage users section in admin App
