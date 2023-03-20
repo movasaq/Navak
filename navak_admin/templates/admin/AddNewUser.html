@@ -1,0 +1,88 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    اضافه کردن کاربر جدید
+{% endblock %}
+
+{% block admin_styles %}
+{% endblock %}
+
+{% block admin_content %}
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12 my-5 text-center">
+                <h2 class="mb-4">اضافه کردن کاربر جدید به سامانه</h2>
+                <p class="m-0">لطفا نوع کاربر را انتخاب کنید</p>
+                <ul class="list-unstyled d-flex flex-column">
+                    <li>
+                        <label for="employee">کارمند</label>
+                        <input type="radio" class="form-check-input" id="employee" name="user-type">
+                    </li>
+                    <li>
+                        <label for="others">سایر</label>
+                        <input type="radio" class="form-check-input" id="others" name="user-type">
+                    </li>
+                </ul>
+            </div>
+
+            <form dir="rtl" id="add-new-user-form" class="d-none">
+                {{ UserForm.hidden_tag() }}
+                <label class="my-3 w-100" for="username-user">
+                    <span>نام کاربری کاربر را وارد نمایید</span>
+                    {{ UserForm.username(class="form-control", id="username-user", placeholder="نام کاربری به صورت لاتین") }}
+                </label>
+
+                <label class="my-3 w-100" for="password-user">
+                    <span>گذرواژه کاربر را وارد نمایید</span>
+                    {{ UserForm.password(class="form-control", id="password-user", placeholder="گذرواژه با درجه سختی بالا") }}
+                </label>
+
+
+                <label class="my-3 w-100" for="username-user">
+                    <span>نام و نام خانوادگی کاربر را وارد نمایید</span>
+                    {{ UserForm.fullname(class="form-control", id="username-user", placeholder="به صورت فارسی") }}
+                </label>
+
+                <label class="my-3 w-100" for="status-user">
+                    <span>وضعیت حساب کاربری را وارد نمایید</span>
+                    {{ UserForm.active(class="d-flex justify-content-around align-items-center list-unstyled", id="status-user") }}
+                </label>
+
+                <label class="my-3 w-100" for="usertag-user">
+                    <span>شناسه کاربری حساب کاربری را وارد نمایید</span>
+                    {{ UserForm.usertag(class="form-control", id="usertag-user", placeholder="با رعایت قواعد وارد نمایید") }}
+                    <p class="m-0 text-center text-muted">بدون @ وارد شود</p>
+                    <p class="m-0 text-center text-muted">حداکثر طول نام کاربری 32 کاراکتر است</p>
+                    <p class="m-0 text-center text-muted">کاراکتر های مجاز حروف انگلیسی اعداد _ هستند</p>
+                </label>
+
+                {{ UserForm.submit(value="ثبت کاربر جدید", class="btn btn-success w-100 ") }}
+
+
+            </form>
+
+            <form dir="rtl" id="add-new-employee-form" class="">
+                {{ EmployeeForm.hidden_tag() }}
+            </form>
+
+
+            <div class="info my-5 text-center">
+                <h3>راهنمایی</h3>
+                <ul dir="rtl" class="p-0 d-flex flex-column justify-content-center align-items-center">
+                    <li>ابتدا نوع کاربر را از طریق دکمه های کنترلی انتخاب سپس شروع به وارد کردن فیلد ها نمایید</li>
+                    <li>در انتخاب گذرواژه حساب کاربری از ترکیب حروف اعداد و شکل ها استفاده کنید</li>
+                    <li>در صورت وارد کردن اشتباهی موارد میتوانید از طریق ویرایش اکانت اقدام به ویرایش تغییرات نمایید
+                    </li>
+                    <li>در صورت مشاهده هر گرونه خطا پس از گذشت زمانی دوباره امتحان کنید</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block admin_scripts %}
+    <script src="{{ url_for('admin.private_static', path='js/AddUser.js') }}"></script>
+{% endblock %}
