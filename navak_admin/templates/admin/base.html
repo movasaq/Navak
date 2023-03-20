@@ -52,13 +52,13 @@
                     <div class="menu-buttons my-5 menu-bottons-aside">
 
                         {% if content.page == "dashboard" %}
-                            <a href=""
+                            <a href="{{ url_for('admin.index_view') }}"
                                class="d-flex text-decoration-none text-white justify-content-end align-items-center my-2 p-3 border-end-brand menu-selected">
                                 <span class="me-3 hidden-btn-menu">داشبورد</span>
                                 <i class="bi bi-list fs-3 mt-2"></i>
                             </a>
                         {% else %}
-                            <a href=""
+                            <a href="{{ url_for('admin.index_view') }}"
                                class="d-flex text-decoration-none text-white justify-content-end align-items-center my-2 p-3 border-end-brand border-hover">
                                 <span class="me-3 hidden-btn-menu">داشبورد</span>
                                 <i class="bi bi-list fs-3 mt-2"></i>
@@ -66,13 +66,13 @@
                         {% endif %}
 
                         {% if content.page == "manage-users" %}
-                            <a href=""
+                            <a href="{{ url_for('admin.manage_users') }}"
                                class="d-flex  text-decoration-none text-white justify-content-end align-items-center my-2 p-3 border-end-brand menu-selected">
                                 <span class="me-3 hidden-btn-menu">مدیریت کاربران</span>
                                 <i class="bi bi-plus-circle-fill"></i>
                             </a>
                         {% else %}
-                            <a href=""
+                            <a href="{{ url_for('admin.manage_users') }}"
                                class="d-flex  text-decoration-none text-white justify-content-end align-items-center my-2  p-3  border-end-brand border-hover">
                                 <span class="me-3 hidden-btn-menu">مدیریت کاربران</span>
                                 <i class="bi bi-plus-circle-fill"></i>
