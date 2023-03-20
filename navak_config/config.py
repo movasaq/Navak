@@ -17,6 +17,7 @@ LOGIN_PATHS = [each for each in zip(LOGIN_PATHS_MATTERIAL[0], LOGIN_PATHS_MATTER
 # Static files Path
 LOGIN_PUBLIC_STATIC = BASE_DIR / "navak" / "logins_public"
 MEDIA_FOLDER = BASE_DIR / "navak_media"
+ADMIN_PRIVATE_STATIC = BASE_DIR / "navak_admin" / "private_static"
 
 # DB INFO
 USERNAME_DB = "navak"
