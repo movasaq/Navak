@@ -12,4 +12,5 @@ def load_roles():
     json_path = (config.BASE_DIR / "navak_config" / "roles.json")
     fp = open(file=json_path)
     j = json.loads(fp.read())
+    fp.close()
     return j["navak_roles"]
