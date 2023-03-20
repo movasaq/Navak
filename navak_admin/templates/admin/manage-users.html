@@ -55,6 +55,49 @@
                         {% endfor %}
                         </tbody>
                     </table>
+
+                    {# pagination for users in table #}
+                    <nav class="d-flex justify-content-center align-items-center" aria-label="Page navigation "
+                         dir="ltr">
+                        <ul class="pagination">
+
+                            {% if content.users.pages - content.current_page  >= 0 and content.current_page != 1 %}
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       href="{{ url_for('admin.manage_users', page=content.current_page - 1) }}"
+                                       aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                            {% for page in content.users.iter_pages(right_edge=1, left_edge=1,right_current=1, left_current=1) %}
+                                {% if page %}
+                                    {% if page == content.current_page %}
+                                        <li class="page-item"><a class="page-link active"
+                                                                 href="{{ url_for('admin.manage_users', page=page) }}">{{ page }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="{{ url_for('admin.manage_users', page=page) }}">{{ page }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if content.users.pages - content.current_page > 0 %}
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       href="{{ url_for('admin.manage_users', page=content.current_page + 1) }}"
+                                       aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                        </ul>
+                    </nav>
+
                 {% endif %}
 
             </div>

@@ -7,7 +7,7 @@ from navak import app
 from navak.extensions import db
 from navak_auth.utils import basic_login_required
 from navak_config import config as config
-
+import navak.template_filters
 
 @app.route("/")
 def index_view():
@@ -45,7 +45,7 @@ def login_public_static(path):
         return "File Not Found", 404
 
 
-@app.route("/setup")
+@app.route("/setup/")
 def setup():
     # load all roles to db
     from navak_config.utils import load_roles as load_roles
@@ -65,18 +65,19 @@ def setup():
 
     UsrRole = models.Role.query.filter(models.Role.RoleName == "admin").first()
 
-    usr = models.User()
-    usr.username = "alisahrify"
-    usr.set_password("123654")
-    usr.FullName = "علی شریفی"
-    usr.set_public_key()
-    usr.UserRole = UsrRole.id
-    usr.Active = True
+    for each in range(120):
+        usr = models.User()
+        usr.username = f"alisahrify {each}"
+        usr.set_password("123654")
+        usr.FullName = " 1علی شریفی"
+        usr.set_public_key()
+        usr.UserRole = UsrRole.id
+        usr.Active = True
 
-    try:
-        db.session.add(usr)
-        db.session.commit()
-    except:
-        db.session.rollback()
+        try:
+            db.session.add(usr)
+            db.session.commit()
+        except:
+            db.session.rollback()
 
     return "OK"
