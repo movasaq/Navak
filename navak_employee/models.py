@@ -92,9 +92,9 @@ class Employee(db.Model):
     def check_password(self, password):
         return check_password_hash(password, self.password)
 
-    def CalculateVacationHour(self):
+    def calculate_vacation_hour(self):
         """
-            this Method calculate vacation hour for each employee by its contract time
+            this Method Calculate vacation hour for each employee by its contract time
             each 30 days => 2.5 Day vacation
         """
         day_delta = (self.end_contract - self.start_contract).days
@@ -103,10 +103,3 @@ class Employee(db.Model):
         # format number to 1 digit after point ==> 2.59898989: 2.6
         vacation = round(vacation)
         self.VacationHourTotal = vacation
-
-
-
-
-
-
-
