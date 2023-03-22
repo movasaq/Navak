@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.linux/bin/python3.10
+.linux/pyvenv.cfg
+navak_media/profiles/default.png
+navak_media/profiles/ede130fa-6f36-4406-9ec0-6135f037f6e1wp2608224-4k-pc-wallpapers.jpg
+.linux/lib64
+.linux/bin/python3
