@@ -10,7 +10,18 @@ def load_roles():
     :return: dict(Roles)
     """
     json_path = (config.BASE_DIR / "navak_config" / "roles.json")
-    fp = open(file=json_path)
-    j = json.loads(fp.read())
-    fp.close()
-    return j["navak_roles"]
+    with open(file=json_path, encoding="utf-8", mode="r") as fp:
+        j = json.loads(fp.read())
+        return j["navak_roles"]
+
+
+def load_education():
+    """
+        this function return all education Degrees
+
+    :return: dict(Education)
+    """
+    json_path = (config.BASE_DIR / "navak_config" / "education.json")
+    with open(file=json_path, mode="r", encoding="utf-8") as fp:
+        j = json.loads(fp.read())
+        return j["navak_education"]
