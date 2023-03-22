@@ -13,7 +13,7 @@ class Education(db.Model):
     """
     __tablename__ = "navak_education_degree"
     id = Column(Integer(), primary_key=True)
-    Name = Column(String(64), nullable=False)
+    Name = Column(String(64), nullable=False, unique=True)
     employee = db.relationship("Employee", backref="education", lazy=True)
 
 
@@ -23,7 +23,7 @@ class WorkPosition(db.Model):
     """
     __tablename__ = "navak_work_position"
     id = Column(Integer(), primary_key=True)
-    Name = Column(String(64), nullable=False)
+    Name = Column(String(64), nullable=False, unique=True)
     employee = db.relationship("Employee", backref="workposition", lazy=True)
 
 
@@ -37,20 +37,20 @@ class Employee(db.Model):
 
     id = Column(Integer(), primary_key=True)
 
-    UserName = Column(String(64), nullable=False)
+    UserName = Column(String(64), nullable=False, unique=True)
     password = Column(String(102), nullable=False)
     FirstName = Column(String(64), nullable=False)
     LastName = Column(String(64), nullable=False)
     FatherName = Column(String(64), nullable=False)
     BirthDay = Column(Date(), nullable=True)
-    MeliCode = Column(String(32), nullable=True)
+    MeliCode = Column(String(32), nullable=True, unique=True)
     BirthLocation = Column(String(64), nullable=True)
-    PhoneNumber = Column(String(11), nullable=True)
+    PhoneNumber = Column(String(11), nullable=True, unique=True)
     EmergencyPhone = Column(String(11), nullable=True)
     Address = Column(String(256), nullable=True)
 
-    Education = Column(Integer(), db.ForeignKey("navak_education_degree.id") ,nullable=True)
-    StaffCode = Column(Integer(), nullable=False)
+    Education = Column(Integer(), db.ForeignKey("navak_education_degree.id"), nullable=True)
+    StaffCode = Column(Integer(), nullable=False, unique=True)
 
     ContractType = Column(String(64), nullable=True)
     StartContract = Column(Date(), nullable=False)
@@ -62,7 +62,7 @@ class Employee(db.Model):
     PublicKey = Column(String(36), unique=True, nullable=False)
 
     Married = Column(Boolean(), nullable=False)
-    Children = Column(Integer(), nullable=False)
+    Children = Column(Integer(), nullable=True, default=0)
     BaseSalary = Column(Integer(), nullable=False)
 
     Created_Time = Column(DateTime(), nullable=False, default=khayyam.JalaliDatetime.now)
