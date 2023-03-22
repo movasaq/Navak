@@ -67,12 +67,13 @@
                     <p class="m-0 text-center text-muted">کاراکتر های مجاز حروف انگلیسی اعداد _ هستند</p>
                 </label>
 
-                {{ UserForm.submit(value="ثبت کاربر جدید", class="btn btn-success w-100 ") }}
+                {{ UserForm.submit(value="ثبت کاربر جدید", class="btn btn-success w-100") }}
 
 
             </form>
 
-            <form dir="rtl" id="add-new-employee-form" class="d-none">
+            <form action="{{ url_for('admin.add_new_employee') }}" method="POST" id="add-new-employee-form" dir="rtl"
+                  class="d-none">
                 {{ EmployeeForm.hidden_tag() }}
                 <h3 class="text-center my-3">اضافه کردن کارمند جدید</h3>
 
@@ -188,7 +189,7 @@
                 <label class="my-3 w-100" for="employee-marid-status">
                     <span class="text-danger">*</span>
                     <span>وضعیت تاهل کارمند را وارد نمایید</span>
-                    {{ EmployeeForm.WorkPosition(class="form-control", placeholder="وضعیت تاهل کارمند" ,id="employee-marid-status") }}
+                    {{ EmployeeForm.Marid(class="d-flex justify-content-around align-items-center list-unstyled", placeholder="وضعیت تاهل کارمند" ,id="employee-marid-status") }}
                 </label>
 
                 <label class="my-3 w-100" for="employee-children">

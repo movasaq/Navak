@@ -1,7 +1,7 @@
 import datetime
 from pathlib import Path
 
-# allowed file extensions
+# allowed file extensions for users profile image
 ALLOWED_EXT_IMG = ["jpg", "png"]
 
 # C:\Users\Public\samane-navak  -----> root_path
@@ -43,7 +43,6 @@ class config:
     SESSION_COOKIE_SAMESITE = 'Lax'
     SESSION_COOKIE_NAME = '_session_cookie_'
 
-    # WTF_CSRF_ENABLED = False
 
 
 class Development(config):

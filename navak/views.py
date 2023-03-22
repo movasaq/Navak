@@ -7,7 +7,7 @@ from navak import app
 from navak.extensions import db
 from navak_auth.utils import basic_login_required
 from navak_config import config as config
-import navak.template_filters
+
 
 @app.route("/")
 def index_view():
@@ -48,10 +48,13 @@ def login_public_static(path):
 @app.route("/setup/")
 def setup():
     # load all roles to db
-    from navak_config.utils import load_roles as load_roles
+    from navak_config.utils import load_roles, load_education
     roles = load_roles()
+    education = load_education()
 
     import navak_auth.models as models
+    import navak_employee.models as EmployeeModel
+
     for each in roles:
         role = models.Role()
         role.RoleName = each["role-en"]
@@ -59,6 +62,26 @@ def setup():
         role.id = each["role-id"]
         try:
             db.session.add(role)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+
+    for each in roles:
+        wk = EmployeeModel.WorkPosition()
+
+        wk.Name = each["role-fa"]
+        try:
+            db.session.add(wk)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+
+    for each in education:
+        new_education = EmployeeModel.Education()
+        new_education.Name = each["name"]
+
+        try:
+            db.session.add(new_education)
             db.session.commit()
         except:
             db.session.rollback()

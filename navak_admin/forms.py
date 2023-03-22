@@ -2,6 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, RadioField, SubmitField, TextAreaField, SelectField, IntegerField
 from wtforms.validators import DataRequired, InputRequired, Length
 
+from navak_admin.utils import get_all_education, get_all_work_position
+
 
 class AddNewUserForm(FlaskForm):
     username = StringField(
@@ -58,14 +60,14 @@ class AddNewEmployeeForm(FlaskForm):
         validators=[
             DataRequired(),
             InputRequired(),
-            Length(min=6, max=64)
+            Length(min=1, max=64)
         ]
     )
     LastName = StringField(
         validators=[
             DataRequired(),
             InputRequired(),
-            Length(min=6, max=64)
+            Length(min=1, max=64)
         ]
     )
     FatherName = StringField(
@@ -119,7 +121,7 @@ class AddNewEmployeeForm(FlaskForm):
     )
 
     Education = SelectField(
-        choices=[("1", "2"), ("1", "1")],
+        choices=get_all_education(),
         validators=[
             DataRequired(),
             InputRequired()
@@ -154,7 +156,7 @@ class AddNewEmployeeForm(FlaskForm):
     )
 
     WorkPosition = SelectField(
-        choices=[("1", "2"), ("1", "1")],
+        choices=get_all_work_position(),
         validators=[
             DataRequired(),
             InputRequired()

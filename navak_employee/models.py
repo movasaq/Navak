@@ -1,7 +1,7 @@
 import uuid
 
 import khayyam
-from sqlalchemy import Column, Integer, String, Boolean, Date, Float, DateTime
+from sqlalchemy import Column, Integer, String, Boolean, Date, Float, DateTime, BigInteger
 from werkzeug.security import check_password_hash
 
 from navak.extensions import db
@@ -63,7 +63,7 @@ class Employee(db.Model):
 
     Married = Column(Boolean(), nullable=False)
     Children = Column(Integer(), nullable=True, default=0)
-    BaseSalary = Column(Integer(), nullable=False)
+    BaseSalary = Column(BigInteger(), nullable=False)
 
     Created_Time = Column(DateTime(), nullable=False, default=khayyam.JalaliDatetime.now)
 
@@ -97,9 +97,10 @@ class Employee(db.Model):
             this Method Calculate vacation hour for each employee by its contract time
             each 30 days => 2.5 Day vacation
         """
-        day_delta = (self.end_contract - self.start_contract).days
+        day_delta = (self.EndContract - self.StartContract).days
         vacation = ((day_delta / 30) * 2.5) * 8
 
         # format number to 1 digit after point ==> 2.59898989: 2.6
         vacation = round(vacation)
         self.VacationHourTotal = vacation
+        self.VacationHourTaken = 0
